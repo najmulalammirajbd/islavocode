@@ -14,7 +14,7 @@ const Redy = () => {
   } = useForm();
   const [loggedInUser, setLoggedInUser] = useContext(UserContext);
   const onSubmit = (data) => {
-    fetch('http://localhost:5000/userpayment', {
+    fetch('http://localhost:5000/api/users/createPaymentLink', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -49,17 +49,17 @@ const Redy = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <input
           defaultValue={loggedInUser.email}
-          {...register('Email', { required: true })}
+          {...register('email', { required: true })}
           placeholder=' আপনার ইমেইল'
         />{' '}
         <br />
         <input
-          {...register('Name', { required: true })}
+          {...register('name', { required: true })}
           placeholder=' আপনার নাম'
         />{' '}
         <br />
         <input
-          {...register('Phone', { required: true })}
+          {...register('phone', { required: true })}
           placeholder=' আপনার মোবাইল'
         />{' '}
         <br />

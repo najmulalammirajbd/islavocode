@@ -66,7 +66,9 @@ function Login() {
         }
     }
     const handleSubmit = (e) => {
+        console.log(user)
         if (newUser && user.email && user.password) {
+            console.log(user)
             createUserWithEmailAndPassword(user.name, user.email, user.password)
                 .then(res => {
                     handleResponse(res, true);
@@ -78,6 +80,7 @@ function Login() {
                             showConfirmButton: false,
                             timer: 2000
                         })
+
                         history.push("/redy")
 
                     }
@@ -109,10 +112,13 @@ function Login() {
         }
 
         if (!newUser && user.email && user.password) {
+            console.log(user)
             signInWithEmailAndPassword(user.email, user.password)
                 .then(res => {
                     handleResponse(res, true);
-                    if (userPaymentDatas.length == 0) {
+                    console.log(user)
+                    if (1) {
+                        console.log(user)
                         Swal.fire({
                             position: 'center',
                             icon: 'success',
@@ -120,36 +126,61 @@ function Login() {
                             showConfirmButton: false,
                             timer: 2000
                         })
-                        history.push("/redy")
-                    }
-                    userPaymentDatas.filter(data => {
-                        if (data?.Email === user.email) {
-                            const payments = data?.payment
-
-                            if (payments === "paid") {
+                        fetch('http://localhost:5000/api/users/getUserPaymentStatus', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({email: user.email}),
+                        })
+                        .then(res => res.json())
+                        .then((data) => {
+                            console.log(data.paymentStatus == 'completed');
+                            if (data.paymentStatus) {
                                 Swal.fire({
                                     position: 'center',
                                     icon: 'success',
-                                    title: 'সফলভাবে লগইন হয়েছে',
+                                    title: 'payment succcess',
                                     showConfirmButton: false,
-                                    timer: 2000
-                                })
-
-                                history.push("/clicknow")
+                                    timer: 2000,
+                                });
+                                history.push('/success');
                             }
-                        }
-                        else {
-                            Swal.fire({
-                                position: 'center',
-                                icon: 'success',
-                                title: 'সফলভাবে লগইন হয়েছে',
-                                showConfirmButton: false,
-                                timer: 2000
-                            })
-                            history.push('/redy')
-                        }
+                            else{
+                                history.push("/redy")
+                            }
+                        });
+                    }
 
-                    })
+
+                    // userPaymentDatas.filter(data => {
+                    //     if (data?.Email === user.email) {
+                    //         const payments = data?.payment
+
+                    //         if (payments === "paid") {
+                    //             Swal.fire({
+                    //                 position: 'center',
+                    //                 icon: 'success',
+                    //                 title: 'সফলভাবে লগইন হয়েছে',
+                    //                 showConfirmButton: false,
+                    //                 timer: 2000
+                    //             })
+
+                    //             history.push("/clicknow")
+                    //         }
+                    //     }
+                    //     else {
+                    //         Swal.fire({
+                    //             position: 'center',
+                    //             icon: 'success',
+                    //             title: 'সফলভাবে লগইন হয়েছে',
+                    //             showConfirmButton: false,
+                    //             timer: 2000
+                    //         })
+                    //         history.push('/redy')
+                    //     }
+
+                    // })
 
                 })
         }

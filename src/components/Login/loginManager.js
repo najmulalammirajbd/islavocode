@@ -26,17 +26,20 @@ export const createUserWithEmailAndPassword = (name, email, password) => {
 }
 
 export const signInWithEmailAndPassword = (email, password) => {
+    console.log(email);
     return firebase.auth().signInWithEmailAndPassword(email, password)
         .then(res => {
             const newUserInfo = res.user;
             newUserInfo.error = '';
             newUserInfo.success = true;
+            console.log(newUserInfo);
             return newUserInfo;
         })
         .catch(function (error) {
             const newUserInfo = {};
             newUserInfo.error = error.message;
             newUserInfo.success = false;
+            console.log(error);
             return newUserInfo;
         });
 }

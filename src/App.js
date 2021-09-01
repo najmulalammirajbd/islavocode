@@ -12,6 +12,7 @@ import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import ClickNow from './components/ClickNow/ClickNow';
 import ResetPassword from './components/ResetPassword/ResetPassword';
 import ThankYou from './components/ThankYou/ThankYou';
+import SucccessScreen from './components/Success/Success';
 
 
 
@@ -40,6 +41,9 @@ function App(props) {
           </Route>
           <Route path="/resetpassword">
             <ResetPassword></ResetPassword>
+          </Route>
+          <Route path="/success">
+            <SucccessScreen></SucccessScreen>
           </Route>
           <Route path="/thankyou">
             <ThankYou></ThankYou>

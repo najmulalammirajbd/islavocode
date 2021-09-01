@@ -137,13 +137,13 @@ function Login() {
                         .then((data) => {
                             console.log(data.paymentStatus == 'completed');
                             if (data.paymentStatus) {
-                                Swal.fire({
-                                    position: 'center',
-                                    icon: 'success',
-                                    title: 'payment succcess',
-                                    showConfirmButton: false,
-                                    timer: 2000,
-                                });
+                                // Swal.fire({
+                                //     position: 'center',
+                                //     icon: 'success',
+                                //     title: 'payment succcess',
+                                //     showConfirmButton: false,
+                                //     timer: 2000,
+                                // });
                                 history.push('/success');
                             }
                             else{

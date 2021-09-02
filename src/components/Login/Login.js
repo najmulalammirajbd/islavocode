@@ -136,7 +136,7 @@ function Login() {
                         .then(res => res.json())
                         .then((data) => {
                             console.log(data.paymentStatus == 'completed');
-                            if (data.paymentStatus) {
+                            if (data.paymentStatus == 'completed') {
                                 // Swal.fire({
                                 //     position: 'center',
                                 //     icon: 'success',
